@@ -3,8 +3,8 @@ from wiktionaryparser import WiktionaryParser
 import json
 from tqdm import tqdm
 
-from flashcards import get_flashcard
-from anki import save_to_text
+from clippings2anki.flashcards import get_flashcard
+from clippings2anki.anki import save_to_text
 
 
 def main(input_file, language):

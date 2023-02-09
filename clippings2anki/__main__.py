@@ -1,5 +1,7 @@
-from clippings import main
+import sys
+sys.path.append("")
 
+import clippings2anki.clippings as clippings
 
 if __name__ == "__main__":
     # read cli arguments
@@ -9,4 +11,4 @@ if __name__ == "__main__":
     parser.add_argument("language", type=str)
     args = parser.parse_args()
 
-    main(args.input_file, args.language)
+    clippings.main(args.input_file, args.language)
