@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "clippings2anki"
-version = "0.0.5"
+version = "0.0.6"
 authors = [
   { name="bewu", email="bewu@bewu.dev" },
 ]
@@ -16,7 +16,11 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+dynamic = ["dependencies"]
 
 [project.urls]
 "Homepage" = "https://github.com/bewuwy/kindle-clippings-anki-exporter"
 "Bug Tracker" = "https://github.com/bewuwy/kindle-clippings-anki-exporter/issues"
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
