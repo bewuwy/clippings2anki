@@ -7,12 +7,9 @@ from flashcards import get_flashcard
 from anki import save_to_text
 
 
-if __name__ == "__main__":
+def main(input_file, language):
     #! read the clippings file
-    inp = "Kindle My Clippings.txt"
-    language = "english"
-    
-    with open(inp, "r") as f:
+    with open(input_file, "r") as f:
         clippings = f.read()
     
     clip_re = re.compile(r"(.*)\n==========")
@@ -57,3 +54,10 @@ if __name__ == "__main__":
     #! save the flashcards to anki-friendly text file
     save_to_text(flashcards)
     print("flashcards saved to flashcards.txt")
+
+
+if __name__ == "__main__":
+    input_file = "Kindle My Clippings.txt"
+    language = "english"
+    
+    main(input_file, language)
