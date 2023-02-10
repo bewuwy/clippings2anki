@@ -1,9 +1,7 @@
 import json
 
     
-def save_to_text(flashcards, file_name="flashcards.txt"):
-    separator = "\t"
-
+def save_to_text(flashcards, file_name="flashcards.txt", separator="\t"):
     text_output = ""
     # last_meaning = ""
     for word, flashcard in flashcards.items():

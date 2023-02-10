@@ -2,12 +2,13 @@ import re
 from wiktionaryparser import WiktionaryParser
 import json
 from tqdm import tqdm
+import os.path
 
 from clippings2anki.flashcards import get_flashcard
 from clippings2anki.anki import save_to_text
 
 
-def main(input_file, language, output_file, save_json=False):
+def main(input_file, language, output_file, save_json=False, anki_separator="\t"):
     #! read the clippings file
     with open(input_file, "r") as f:
         clippings = f.read()
@@ -38,7 +39,7 @@ def main(input_file, language, output_file, save_json=False):
     
     flashcards = {}
 
-    for i in tqdm(clips_set):
+    for i in tqdm(clips_set, desc="Getting definitions from wiktionary"):
         word, f = get_flashcard(i, parser)
         
         if not word:
@@ -46,12 +47,15 @@ def main(input_file, language, output_file, save_json=False):
         
         flashcards[word] = f
     
+    print(f"\n{len(flashcards)} flashcards created out of {len(clips_set)} clippings ({len(clips_set) - len(flashcards)} clippings discarded)")
+    
     if save_json:
         # save the flashcards to json file
-        with open("flashcards.json", "w") as f:
+        json_file = os.path.splitext(output_file)[0] + ".json"
+        with open(json_file, "w") as f:
             json.dump(flashcards, f, indent=4)
-        print("flashcards saved to flashcards.json")
+        print(f"Saved flashcards in JSON format to \"{json_file}\"")
     
     #! save the flashcards to anki-friendly text file
-    save_to_text(flashcards, output_file)
-    print(f"flashcards saved to {output_file}")
+    save_to_text(flashcards, file_name=output_file, separator=anki_separator)
+    print(f"Flashcards exported to anki-friendly text file to \"{output_file}\"")
