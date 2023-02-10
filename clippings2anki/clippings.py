@@ -7,7 +7,7 @@ from clippings2anki.flashcards import get_flashcard
 from clippings2anki.anki import save_to_text
 
 
-def main(input_file, language):
+def main(input_file, language, output_file, save_json=False):
     #! read the clippings file
     with open(input_file, "r") as f:
         clippings = f.read()
@@ -46,18 +46,12 @@ def main(input_file, language):
         
         flashcards[word] = f
     
-    # save the flashcards to json file
-    with open("flashcards.json", "w") as f:
-        json.dump(flashcards, f, indent=4)
-    print("flashcards saved to flashcards.json")
+    if save_json:
+        # save the flashcards to json file
+        with open("flashcards.json", "w") as f:
+            json.dump(flashcards, f, indent=4)
+        print("flashcards saved to flashcards.json")
     
     #! save the flashcards to anki-friendly text file
-    save_to_text(flashcards)
-    print("flashcards saved to flashcards.txt")
-
-
-if __name__ == "__main__":
-    input_file = "Kindle My Clippings.txt"
-    language = "english"
-    
-    main(input_file, language)
+    save_to_text(flashcards, output_file)
+    print(f"flashcards saved to {output_file}")

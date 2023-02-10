@@ -1,6 +1,6 @@
 __pycache__
 venv
-flashcards.txt
+*flashcards.txt
 test.txt
 *Clippings.txt
 *.json
