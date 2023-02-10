@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "clippings2anki"
-version = "0.0.8"
+version = "0.1.1"
 authors = [
   { name="bewu", email="bewu@bewu.dev" },
 ]

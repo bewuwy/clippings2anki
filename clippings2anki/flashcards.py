@@ -12,8 +12,8 @@ def get_flashcard(word, parser, log=False):
             definitions_set.extend(d["text"])
             
         definitions.append(definitions_set)
-    
-    if len(definitions[0]) == 0:
+
+    if len(definitions) == 0 or len(definitions[0]) == 0:
         return None, None
     
     flashcard = []
