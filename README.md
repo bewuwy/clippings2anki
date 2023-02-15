@@ -12,7 +12,15 @@ pip install clippings2anki
 
 ## Usage
 
-Basic usage:
+### GUI usage
+
+Just run the script with no arguments to open the GUI:
+
+```
+python -m clippings2anki
+```
+
+### CLI usage
 
 ```
 python -m clippings2anki [My Clippings.txt] [language] -o [output.txt]
