@@ -6,9 +6,14 @@ import os.path
 
 from clippings2anki.flashcards import get_flashcard
 from clippings2anki.anki import save_to_text
+import clippings2anki.gui
 
 
-def main(input_file, language, output_file, save_json=False, anki_separator="\t"):
+def main_gui():
+    clippings2anki.gui.main()
+
+
+def main_cli(input_file, language, output_file, save_json=False, anki_separator="\t", qt_signal=None):
     #! read the clippings file
     with open(input_file, "r") as f:
         clippings = f.read()
@@ -39,13 +44,19 @@ def main(input_file, language, output_file, save_json=False, anki_separator="\t"
     
     flashcards = {}
 
-    for i in tqdm(clips_set, desc="Getting definitions from wiktionary"):
-        word, f = get_flashcard(i, parser)
+    for i, clip in enumerate(tqdm(clips_set, desc="Getting definitions from wiktionary")):
+        word, f = get_flashcard(clip, parser)
         
         if not word:
             continue
         
         flashcards[word] = f
+        
+        if qt_signal:
+            qt_signal.emit(int(((i+1) / len(clips_set))*100))
+    
+    if qt_signal:
+        qt_signal.emit(100)
     
     print(f"\n{len(flashcards)} flashcards created out of {len(clips_set)} clippings ({len(clips_set) - len(flashcards)} clippings discarded)")
     
