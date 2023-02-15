@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "clippings2anki"
-version = "0.1.2"
+version = "0.2.0"
 authors = [
   { name="bewu", email="bewu@bewu.dev" },
 ]
@@ -18,7 +18,8 @@ classifiers = [
 ]
 dependencies = [
     "tqdm",
-    "wiktionaryparser"
+    "wiktionaryparser",
+    "pyqt6"
 ]
 
 [project.urls]
