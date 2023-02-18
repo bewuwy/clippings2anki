@@ -5,3 +5,5 @@ test.txt
 *Clippings.txt
 *.json
 dist
+build
+*.spec
